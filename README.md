@@ -12,7 +12,7 @@
 
 ```bash
 git clone https://github.com/GregGuazzone/Black-Scholes-Options.git
-cd options-study
+cd options
 ```
 
 ##### 2. Create a virtual environment to isolate project dependencies (optional but recommended).
