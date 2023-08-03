@@ -3,6 +3,7 @@ import yoptions as yo
 import pandas as pd
 import math
 from scipy.stats import norm
+from datetime import datetime, timedelta
 
 class Study:
     def __init__(self, ticker, option_type):
@@ -14,9 +15,15 @@ class Study:
 
     def get_expiration_dates(self):
         exp_dates = yo.get_expiration_dates(stock_ticker=self.ticker)
-        print("Available expiration dates:")
-        for date in exp_dates:
-            print(date)
+
+        #Days are off by 1 for some reason
+        updated_exp_dates = []
+        for date_str in exp_dates:
+            date = datetime.strptime(date_str, '%Y-%m-%d') + timedelta(days=1)
+            updated_exp_dates.append(date.strftime('%Y-%m-%d'))
+
+        for date_str in updated_exp_dates:
+            print(date_str)
 
     def get_options_data(self, date):
         tte = (pd.to_datetime(date) - pd.Timestamp.today()).days + 1
